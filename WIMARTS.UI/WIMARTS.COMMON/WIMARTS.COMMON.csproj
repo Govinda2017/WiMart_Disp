@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{408BBF2A-E277-40F5-9A00-747A50EC4EF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WIMARTS.COMMON</RootNamespace>
+    <AssemblyName>WIMARTS.COMMON</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\iPRINT.COMMON.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\Bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\iPRINT.COMMON.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RedRapidUI">
+      <HintPath>..\..\3rdParty\RedRapidUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmAppSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAppSettings.Designer.cs">
+      <DependentUpon>FrmAppSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBoxWastage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBoxWastage.Designer.cs">
+      <DependentUpon>FrmBoxWastage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCompanyMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCompanyMaster.designer.cs">
+      <DependentUpon>FrmCompanyMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCustomerMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCustomerMaster.designer.cs">
+      <DependentUpon>FrmCustomerMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDispatchMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDispatchMaster.Designer.cs">
+      <DependentUpon>FrmDispatchMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHWCSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHWCSettings.Designer.cs">
+      <DependentUpon>FrmHWCSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHWCValues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHWCValues.Designer.cs">
+      <DependentUpon>FrmHWCValues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInspectionSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInspectionSettings.Designer.cs">
+      <DependentUpon>FrmInspectionSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJobReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJobReports.Designer.cs">
+      <DependentUpon>FrmJobReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSignIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSignIn.designer.cs">
+      <DependentUpon>FrmSignIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTransporterMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTransporterMaster.Designer.cs">
+      <DependentUpon>FrmTransporterMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserManager.designer.cs">
+      <DependentUpon>FrmUserManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmAppSettings.resx">
+      <DependentUpon>FrmAppSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBoxWastage.resx">
+      <DependentUpon>FrmBoxWastage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCompanyMaster.resx">
+      <DependentUpon>FrmCompanyMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCustomerMaster.resx">
+      <DependentUpon>FrmCustomerMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDispatchMaster.resx">
+      <DependentUpon>FrmDispatchMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHWCSettings.resx">
+      <DependentUpon>FrmHWCSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHWCValues.resx">
+      <DependentUpon>FrmHWCValues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInspectionSettings.resx">
+      <DependentUpon>FrmInspectionSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJobReports.resx">
+      <DependentUpon>FrmJobReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSignIn.resx">
+      <DependentUpon>FrmSignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTransporterMaster.resx">
+      <DependentUpon>FrmTransporterMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserManager.resx">
+      <DependentUpon>FrmUserManager.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WIMARTS.DB\WIMARTS.DB.BLL\WIMARTS.DB.BLL.csproj">
+      <Project>{9D629898-9E4A-4B09-A77B-85244311329E}</Project>
+      <Name>WIMARTS.DB.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.DB\WIMARTS.DB.BusinessObjects\WIMARTS.DB.BusinessObjects.csproj">
+      <Project>{3198BC31-7765-4C2A-B242-0C1DE68FDDFF}</Project>
+      <Name>WIMARTS.DB.BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.HW\RedCommunication\RedCommunication.csproj">
+      <Project>{803964F5-0F83-428B-B11E-FC4642B9B209}</Project>
+      <Name>RedCommunication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.HW\WIMARTS.Inspection\WIMARTS.INSPECTION.csproj">
+      <Project>{A7A43FE6-9440-4B51-8FF4-2BFAEB5DB2EF}</Project>
+      <Name>WIMARTS.INSPECTION</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.UTILS\WIMARTS.iCODEMGR\WIMARTS.iCODEMGR.csproj">
+      <Project>{112B81D9-2A06-40CE-875F-2CF7BFE9B4A2}</Project>
+      <Name>WIMARTS.iCODEMGR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.UTILS\WIMARTS.REPORTS\WIMARTS.REPORTS.csproj">
+      <Project>{8538375A-AD24-4C6F-BAAE-A116465A03D2}</Project>
+      <Name>WIMARTS.REPORTS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WIMARTS.UTILS\WIMARTS.UTIL\WIMARTS.UTIL.csproj">
+      <Project>{BA851FC4-8478-4B21-9D96-57D8F27DEC9F}</Project>
+      <Name>WIMARTS.UTIL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
