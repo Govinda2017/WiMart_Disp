@@ -351,7 +351,7 @@ namespace RedCommunication.SERIAL
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Log File";
 			// 
-            // FrmSettings
+            // FrmComSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -362,7 +362,9 @@ namespace RedCommunication.SERIAL
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-            this.Name = "FrmSettings";
+            this.Name = "FrmComSettings";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Serial port settings";
 			this.groupBox1.ResumeLayout(false);

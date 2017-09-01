@@ -82,7 +82,7 @@ namespace RedCommunication.TCP
             try
             {
                 Object objData = tdata;
-                byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
+                byte[] byData = System.Text.Encoding.UTF8.GetBytes(objData.ToString());
                 if (m_clientSocket != null && m_clientSocket.Connected == true)
                     size = m_clientSocket.Send(byData);
                 return size;
@@ -99,7 +99,7 @@ namespace RedCommunication.TCP
             try
             {
                 Object objData = strData;
-                byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
+                byte[] byData = System.Text.Encoding.UTF8.GetBytes(objData.ToString());
                 byte[] sendData = new byte[byData.Length + 3];
                 sendData[0] = 0x02;
                 for (int i = 0; i < byData.Length; i++)
@@ -125,7 +125,7 @@ namespace RedCommunication.TCP
             try
             {
                 Object objData = strData;
-                byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
+                byte[] byData = System.Text.Encoding.UTF8.GetBytes(objData.ToString());
                 if (m_clientSocket != null && m_clientSocket.Connected == true)
                     size = m_clientSocket.Send(byData);
                 return size;

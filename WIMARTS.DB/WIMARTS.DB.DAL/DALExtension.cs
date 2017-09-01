@@ -41,7 +41,7 @@ namespace WIMARTS.DB.DAL
             {
                 throw ex;
             }
-        }
+        }      
         public DataSet GetProductDataset()
         {
             try
@@ -357,7 +357,7 @@ namespace WIMARTS.DB.DAL
     }
 
     public partial class DispatchMasterDAO
-    {
+    {        
         public DataSet GetDispatchMDatasetByValue(int Flag, string Value)
         {
             try
@@ -390,8 +390,6 @@ namespace WIMARTS.DB.DAL
                     oDispatchMaster.DispMasterID = Convert.ToInt32(oDbDataReader["DispMasterID"]);
                     oDispatchMaster.GDN = Convert.ToString(oDbDataReader["GDN"]);
                     oDispatchMaster.CustID = Convert.ToInt32(oDbDataReader["CustID"]);
-                    if (oDbDataReader["TransporterID"] != DBNull.Value)
-                        oDispatchMaster.TransporterID = Convert.ToInt32(oDbDataReader["TransporterID"]);
                     oDispatchMaster.VehicleNo = Convert.ToString(oDbDataReader["VehicleNo"]);
                     oDispatchMaster.DriverName = Convert.ToString(oDbDataReader["DriverName"]);
                     oDispatchMaster.LineID = Convert.ToInt32(oDbDataReader["LineID"]);
@@ -559,12 +557,12 @@ namespace WIMARTS.DB.DAL
                 {
                     DetailsDispatchDetails oDispatchDetails = new DetailsDispatchDetails();
                     oDispatchDetails.ProductName = Convert.ToString(oDbDataReader["ProductName"]);
-
+                    
                     oDispatchDetails.ProdCode = Convert.ToString(oDbDataReader["ProdCode"]);
                     oDispatchDetails.QtytoDispatch = Convert.ToDecimal(oDbDataReader["QtytoDispatch"]);
-                    oDispatchDetails.Packsize = Convert.ToDecimal(oDbDataReader["Packsize"]);
+                    oDispatchDetails.Packsize = Convert.ToDecimal(oDbDataReader["Packsize"]);                 
                     oDispatchDetails.DispatchedQty = Convert.ToDecimal(oDbDataReader["DispatchedQty"]);
-
+                 
                     lstDispatchDetailss.Add(oDispatchDetails);
                 }
                 oDbDataReader.Close();
@@ -590,9 +588,9 @@ namespace WIMARTS.DB.DAL
                     oDispatchDetails.ProductName = Convert.ToString(oDbDataReader["ProductName"]);
                     oDispatchDetails.ProductName = oDispatchDetails.ProductName;
                     oDispatchDetails.ProdCode = Convert.ToString(oDbDataReader["ProdCode"]);
-                    oDispatchDetails.Packsize = Convert.ToDecimal(oDbDataReader["Packsize"]);
+                    oDispatchDetails.Packsize = Convert.ToDecimal(oDbDataReader["Packsize"]);                                     
                     oDispatchDetails.ScanneddQty = Convert.ToDecimal(oDbDataReader["DispatchedQty"]);
-
+                   
                     lstDispatchDetailss.Add(oDispatchDetails);
                 }
                 oDbDataReader.Close();
@@ -608,7 +606,7 @@ namespace WIMARTS.DB.DAL
             try
             {
                 DbCommand oDbCommand = DbProviderHelper.CreateCommand("UPDATEDispatchDetailsDispatchedQty", CommandType.StoredProcedure);
-                //    oDbCommand.Parameters.Add(DbProviderHelper.CreateParameter("@DispatchedQty", DbType.Decimal, oDispatchDetails.DispatchedQty));
+            //    oDbCommand.Parameters.Add(DbProviderHelper.CreateParameter("@DispatchedQty", DbType.Decimal, oDispatchDetails.DispatchedQty));
                 oDbCommand.Parameters.Add(DbProviderHelper.CreateParameter("@DispDetailsID", DbType.Int32, oDispatchDetails.DispDetailsID));
                 oDbCommand.Parameters.Add(DbProviderHelper.CreateParameter("@LUDate", DbType.DateTime, oDispatchDetails.LUDate));
                 return DbProviderHelper.ExecuteNonQuery(oDbCommand);
@@ -723,7 +721,7 @@ namespace WIMARTS.DB.DAL
                 throw ex;
             }
         }
-        public DataSet GetItemDetailsDateDS(int Flag, int LineID, DateTime FromDate, DateTime ToDate)
+        public DataSet GetItemDetailsDateDS(int Flag, int LineID,DateTime FromDate, DateTime ToDate)
         {
             try
             {
@@ -801,7 +799,7 @@ namespace WIMARTS.DB.DAL
                 while (oDbDataReader.Read())
                 {
                     CSVItemDetails oCSVItemDetails = new CSVItemDetails();
-
+                  
                     oCSVItemDetails.ProdCode = Convert.ToString(oDbDataReader["ProdCode"]);
                     oCSVItemDetails.BatchCode = Convert.ToString(oDbDataReader["BatchCode"]);
                     oCSVItemDetails.UIDCode = Convert.ToString(oDbDataReader["UIDCode"]);
@@ -809,7 +807,7 @@ namespace WIMARTS.DB.DAL
                     oCSVItemDetails.Packsize = Convert.ToDecimal(oDbDataReader["Packsize"]);
                     if (oDbDataReader["DispatchedDate"] != DBNull.Value)
                         oCSVItemDetails.DispatchedDate = Convert.ToDateTime(oDbDataReader["DispatchedDate"]);
-
+                    
                     lstCSVItemDetailss.Add(oCSVItemDetails);
                 }
                 oDbDataReader.Close();
@@ -950,7 +948,7 @@ namespace WIMARTS.DB.DAL
             {
                 throw ex;
             }
-        }
+        }     
         public int UpdateInspectionStatus(ItemDetails oDetails)
         {
             try
@@ -1013,7 +1011,7 @@ namespace WIMARTS.DB.DAL
                 throw ex;
             }
         }
-
+        
 
         public static DataSet GetItemDetailsDateDSCount(int Flag, int LineID, DateTime FromDate, DateTime ToDate)
         {

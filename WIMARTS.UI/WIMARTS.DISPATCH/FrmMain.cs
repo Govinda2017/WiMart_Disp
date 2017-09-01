@@ -15,6 +15,8 @@ using WIMARTS.UTIL;
 using WIMARTS.HWController;
 using WIMARTS.UTIL.SystemIntegrity;
 using System.Diagnostics;
+using rSys;
+using CondotCombiSys;
 
 namespace WIMARTS.DISPATCH
 {
@@ -23,8 +25,6 @@ namespace WIMARTS.DISPATCH
     {
         Start,
         StandBy,
-        SettingMode,
-        TestMode,
         ReadyMode,
         Error,
         LoadJob,
@@ -38,27 +38,25 @@ namespace WIMARTS.DISPATCH
 
     #endregion Appmodes
 
-    #region Class FrmMain
-
     public partial class FrmMain : Form
     {
+        private redTrace oTrace = new redTrace(true, "WIMARTS_DISP_MAIN");
+
         #region Properties
 
         private BLLManager bllMgr;
         private UserMaster mCurUserLogged;
+
+        private bool HasController = true;
+        //private HWControl mHWControl;
+        //private Globals.HWCValues mHwcValues;
+        
         private IRedInspection mInspectDev1;
         private IRedInspection mInspectDev2;
-        private HWControl mHWControl;
-        private Globals.HWCValues mHwcValues;
-        private enum DispatchMode
-        {
-            Free = 0,
-            Controlled = 1,
-        }
+        
         private int HwAccessMode = 0;
         private bool _ManualMode = false;
-        private bool HasController = true;
-
+        
         /// <summary>
         /// This will be used when, Only valid FG Code will be used for checking.
         /// No UID Tracing and other parameters.
@@ -134,13 +132,15 @@ namespace WIMARTS.DISPATCH
             {
                 if (IsManual == true)
                 {
-                    mHWControl.TMODESTART();
-                    RetryCounts++;
+                    /// Set Conveyor in Transport Mode
+                    //mHWControl.TMODESTART();                    
+                    //RetryCounts++;
                 }
                 else
                 {
-                    mHWControl.CURRENTMODEEXIT();
-                    RetryCounts++;
+                    /// Set Conveyor in Inspection Mode
+                    //mHWControl.CURRENTMODEEXIT();
+                    //RetryCounts++;
                 }
             }
         }
@@ -152,15 +152,17 @@ namespace WIMARTS.DISPATCH
             set
             {
                 _AppMode = value;
+                UpdateText(lblapmode, _AppMode.ToString());
                 switch (_AppMode)
                 {
                     case AppMode.Start:
                         {
-                            UpdateStatusColor(btnHWCIndic, false);
+                            LoadDispatchMaster();
+
+                            UpdateStatusColor(ctrlPLCDeck1, false);
                             UpdateStatusColor(btnCamIndicator, false);
                             UpdateStatusColor(btnScanIndicator, false);
-                            BindDetails();
-                            LoadDispatchMaster();
+                            
                             TriggerQueue = new Queue<int>();
                             EnableControl(btnStartInsp, false);
                             EnableControl(btnStopInsp, true);
@@ -173,6 +175,7 @@ namespace WIMARTS.DISPATCH
                             GoodCount = TotalBadCount = 0;
                             UpdateText(lblStatusBar, "SYSTEM STARTED...");
                             ConnectController();
+                            Thread.Sleep(500);
                             StartApplication();
                             Trace.TraceInformation("{0}, System Started", DateTime.Now);
                         }
@@ -204,44 +207,21 @@ namespace WIMARTS.DISPATCH
                                 UpdateText(lblScanStatus, "");
                                 UpdateText(lblSensor1Count, "0");
                                 UpdateText(lblSensor2Count, "0");
-                                UpdateStatusColor(btnHWCIndic, true);
+                                UpdateStatusColor(ctrlPLCDeck1, true);
                                 UpdateStatusColor(lblStatusBar, true);
                                 UpdateStatusColor(lblScanStatus, true);
                                 Trace.TraceInformation("{0}, System is in Standby", DateTime.Now);
                             }
                         }
-                        break;
-                    case AppMode.SettingMode:
-                        if (HasController == true)
-                        {
-                            mHWControl.DMODESTART();
-                            RetryCounts++;
-                        }
-                        break;
-                    case AppMode.TestMode:
-                        {
-                            if (HasController == true)
-                            {
-                                mHWControl.TMODESTART();
-                                RetryCounts++;
-                            }
-                            EnableControl(cmbDispMaster, false);
-                            EnableControl(btnStartInsp, false);
-                            EnableControl(btnStopInsp, true);
-                            EnableControl(btnSettings, false);
-                            EnableControl(btnMode, false);
-                            UpdateText(lblStatusBar, "SYSTEM IS IN TEST MODE...");
-                            Trace.TraceInformation("{0}, System is in Test mode", DateTime.Now);
-                        }
-                        break;
+                        break;                    
                     case AppMode.ReadyMode:
                         {
                             if (HasController == true)
                             {
-                                mHWControl.CURRENTMODEEXIT();
-                                RetryCounts++;
+                                //mHWControl.CURRENTMODEEXIT();
+                                //RetryCounts++;
+                                
                             }
-
                             ManualMode = !(HwAccessMode == 0 || HwAccessMode == 1);
 
                             TriggerQueue = new Queue<int>();
@@ -253,7 +233,7 @@ namespace WIMARTS.DISPATCH
                             EnableControl(btnSettings, true);
                             EnableControl(btnMode, true);
                             UpdateText(lblStatusBar, "SYSTEM IS READY...");
-                            UpdateStatusColor(btnHWCIndic, true);
+                            UpdateStatusColor(ctrlPLCDeck1, true);
                             UpdateStatusColor(lblStatusBar, true);
                             Trace.TraceInformation("{0}, System is in Ready mode", DateTime.Now);
                         }
@@ -263,7 +243,7 @@ namespace WIMARTS.DISPATCH
                             if (HasController == true)
                             {
                                 //mHWControl.StopBuzzer();
-                                RetryCounts++;
+                                //RetryCounts++;
                             }
                             DisconnectCam1();
                             EnableControl(btnStartInsp, true);
@@ -395,7 +375,7 @@ namespace WIMARTS.DISPATCH
                         break;
                     case AppMode.ExitApp:
                         DisconnectController();
-                        UpdateStatusColor(btnHWCIndic, true);
+                        UpdateStatusColor(ctrlPLCDeck1, true);
                         Trace.TraceInformation("{0}, System exited", DateTime.Now);
                         ExitApplication();
                         break;
@@ -488,13 +468,16 @@ namespace WIMARTS.DISPATCH
         {
             InitializeComponent();
             lblLicHolder.Text = RedSys.Integrity.GetCompName;
-            InitController();
+            
             bllMgr = new BLLManager();
             mCurUserLogged = oCurUserLogged;
             mJobMaster = new DispatchMaster();
             lstDispatchMasters = new List<DispatchMaster>();
             lstDispDetails = new List<DispatchDetails>();
-            mHwcValues = Globals.HWCSettings.ReadValues();
+
+            HasController = UTIL.SystemIntegrity.Globals.AppSettings.HasHwController;
+            
+            //mHwcValues = Globals.HWCSettings.ReadValues();
 
             HwAccessMode = UTIL.SystemIntegrity.Globals.AppSettings.HWMode;
 
@@ -502,12 +485,13 @@ namespace WIMARTS.DISPATCH
             AllowOnlyScheduleDispatch = UTIL.SystemIntegrity.Globals.AppSettings.AllowOnlyScheduleDispatch;
             AllowOnlyProductionVerified = UTIL.SystemIntegrity.Globals.AppSettings.AllowOnlyProductionVerified;
             
-            HasController = UTIL.SystemIntegrity.Globals.AppSettings.HasHwController;
             DispatchDaysLimit = UTIL.SystemIntegrity.Globals.AppSettings.DispatchDaysLimit;
         }
-
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            BindDetails();
+            InitController();
+
             ManualMode = !(HwAccessMode == 0 || HwAccessMode == 1);
 
             m_AppMode = AppMode.Start;
@@ -545,7 +529,12 @@ namespace WIMARTS.DISPATCH
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            m_AppMode = AppMode.TestMode;
+            /// Call here PLC Settings Form
+            /// 
+            mfrmPLCExecutor = new frmPLCSettings(ctrlPLCDeck1);
+            mfrmPLCExecutor.ShowDialog();
+            mfrmPLCExecutor = null;
+
         }
 
         private void txtScannedData_TextChanged(object sender, EventArgs e)
@@ -582,5 +571,12 @@ namespace WIMARTS.DISPATCH
             LoadDispatchMaster();
         }
     }
-    #endregion Class FrmMain
+    
+
+    //private enum DispatchMode
+    //{
+    //    Free = 0,
+    //    Controlled = 1,
+    //}
+        
 }

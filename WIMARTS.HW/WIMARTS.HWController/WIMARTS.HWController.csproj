@@ -93,6 +93,13 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="redTrace">
+      <HintPath>..\..\3rdParty\redTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="RedXML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\3rdParty\RedXML.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -103,19 +110,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HWController.cs" />
-    <Compile Include="HWProtocol.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Watch.cs">
+    <Compile Include="HWC_PLC\CtrlCCPLCDeck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HWC_PLC\CtrlCCPLCDeck.Designer.cs">
+      <DependentUpon>CtrlCCPLCDeck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HWC_PLC\CtrlHMIParamSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HWC_PLC\CtrlHMIParamSet.designer.cs">
+      <DependentUpon>CtrlHMIParamSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HWC_PLC\frmPLCSetings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Watch.designer.cs">
-      <DependentUpon>Watch.cs</DependentUpon>
+    <Compile Include="HWC_PLC\frmPLCSetings.Designer.cs">
+      <DependentUpon>frmPLCSetings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HWC_PLC\PLCControls.cs" />
+    <Compile Include="HWC_PLC\PLCHWController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Watch.resx">
-      <DependentUpon>Watch.cs</DependentUpon>
+    <EmbeddedResource Include="HWC_PLC\CtrlCCPLCDeck.resx">
+      <DependentUpon>CtrlCCPLCDeck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HWC_PLC\CtrlHMIParamSet.resx">
+      <DependentUpon>CtrlHMIParamSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HWC_PLC\frmPLCSetings.resx">
+      <DependentUpon>frmPLCSetings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +161,15 @@
       <Project>{803964F5-0F83-428B-B11E-FC4642B9B209}</Project>
       <Name>RedCommunication</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectionGO.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectionNO.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HWC_EMB\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

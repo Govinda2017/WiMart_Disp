@@ -513,7 +513,6 @@ namespace WIMARTS.DB.BLL
                 throw ex;
             }
         }
-
     }
     public partial class DispatchDetailsBLL
     {
@@ -689,7 +688,7 @@ namespace WIMARTS.DB.BLL
                 throw ex;
             }
         }
-        public DataSet GetItemDetailsDateDS(ItemDate flag, int LineID, DateTime FromDate, DateTime ToDate)
+        public DataSet GetItemDetailsDateDS(ItemDate flag,int LineID, DateTime FromDate, DateTime ToDate)
         {
             try
             {

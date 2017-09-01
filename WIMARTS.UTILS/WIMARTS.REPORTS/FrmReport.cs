@@ -68,20 +68,12 @@ namespace WIMARTS.REPORTS
             fp.Filter = "Excel file (*.xls)|*.xls";
             string fileName = Application.StartupPath + MailSubject + ".xls";
             fp.FileName = fileName;
-            
             if (fp.ShowDialog() == DialogResult.OK)
             {
                 ReportDocument rptCls = (ReportDocument)crystalReportViewer1.ReportSource;
-                  rptCls.ExportToDisk(ExportFormatType.Excel, fp.FileName);
-          
-
-            //CrystalDecisions.ReportAppServer.ReportDefModel.ExportOptions exportOpts1 = new CrystalDecisions.ReportAppServer.ReportDefModel.ExportOptions();
-            //exportOpts1.ExportFormatType = CrReportExportFormatEnum.crReportExportFormatXLSX;
-            //exportOpts1.FormatOptions = RASXLXSExportOpts;
-
-            //// And Export
-            //rptCls.PrintOutputController.ExportEx(exportOpts1).Save(fp.FileName, true);
+                rptCls.ExportToDisk(ExportFormatType.Excel, fp.FileName);
             }
+
         }
 
         private void BTN_ExportWord_Click(object sender, EventArgs e)

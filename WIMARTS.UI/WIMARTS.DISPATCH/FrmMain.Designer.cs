@@ -28,22 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.splitMain = new System.Windows.Forms.SplitContainer();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.splitDetails = new System.Windows.Forms.SplitContainer();
             this.splitDispMasterDetails = new System.Windows.Forms.SplitContainer();
-            this.picImage = new System.Windows.Forms.PictureBox();
-            this.txtCutomer = new System.Windows.Forms.TextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtTransporter = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTotalQty = new System.Windows.Forms.TextBox();
@@ -62,6 +55,7 @@
             this.txtStartedAt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.lblapmode = new System.Windows.Forms.Label();
             this.btnMode = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnStartInsp = new System.Windows.Forms.Button();
@@ -95,7 +89,7 @@
             this.lblSensor1Count = new System.Windows.Forms.Label();
             this.lblSensor2Count = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnHWCIndic = new System.Windows.Forms.Button();
+            this.ctrlPLCDeck1 = new rcs.CONTROLS.CtrlPLCDeck();
             this.btnCamIndicator = new System.Windows.Forms.Button();
             this.btnScanIndicator = new System.Windows.Forms.Button();
             this.lblLicHolder = new System.Windows.Forms.Label();
@@ -104,18 +98,22 @@
             this.SplitStatus = new System.Windows.Forms.SplitContainer();
             this.lblScanStatus = new System.Windows.Forms.Label();
             this.lblStatusBar = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTransporter = new System.Windows.Forms.TextBox();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picImage = new System.Windows.Forms.PictureBox();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
             this.splitMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.splitDetails.Panel1.SuspendLayout();
             this.splitDetails.Panel2.SuspendLayout();
             this.splitDetails.SuspendLayout();
             this.splitDispMasterDetails.Panel1.SuspendLayout();
             this.splitDispMasterDetails.Panel2.SuspendLayout();
             this.splitDispMasterDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.splitDispDetails.Panel1.SuspendLayout();
             this.splitDispDetails.Panel2.SuspendLayout();
@@ -132,6 +130,9 @@
             this.SplitStatus.Panel1.SuspendLayout();
             this.SplitStatus.Panel2.SuspendLayout();
             this.SplitStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.SuspendLayout();
             // 
             // splitMain
@@ -152,32 +153,9 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.splitDetails);
-            this.splitMain.Size = new System.Drawing.Size(1150, 658);
+            this.splitMain.Size = new System.Drawing.Size(1150, 665);
             this.splitMain.SplitterDistance = 95;
             this.splitMain.TabIndex = 0;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.White;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 118);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(93, 0);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Black;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(93, 118);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
             // 
             // splitDetails
             // 
@@ -196,7 +174,7 @@
             // splitDetails.Panel2
             // 
             this.splitDetails.Panel2.Controls.Add(this.splitDispDetails);
-            this.splitDetails.Size = new System.Drawing.Size(1150, 658);
+            this.splitDetails.Size = new System.Drawing.Size(1150, 665);
             this.splitDetails.SplitterDistance = 426;
             this.splitDetails.TabIndex = 1;
             // 
@@ -215,10 +193,10 @@
             // 
             // splitDispMasterDetails.Panel2
             // 
-            this.splitDispMasterDetails.Panel2.Controls.Add(this.txtCutomer);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.btnRefresh);
-            this.splitDispMasterDetails.Panel2.Controls.Add(this.label9);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.txtTransporter);
+            this.splitDispMasterDetails.Panel2.Controls.Add(this.txtCustomer);
+            this.splitDispMasterDetails.Panel2.Controls.Add(this.label9);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.label6);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.label5);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.txtTotalQty);
@@ -236,65 +214,9 @@
             this.splitDispMasterDetails.Panel2.Controls.Add(this.cmbStatus);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.txtStartedAt);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.label12);
-            this.splitDispMasterDetails.Size = new System.Drawing.Size(426, 535);
-            this.splitDispMasterDetails.SplitterDistance = 125;
+            this.splitDispMasterDetails.Size = new System.Drawing.Size(426, 542);
+            this.splitDispMasterDetails.SplitterDistance = 148;
             this.splitDispMasterDetails.TabIndex = 12;
-            // 
-            // picImage
-            // 
-            this.picImage.BackColor = System.Drawing.Color.White;
-            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
-            this.picImage.Location = new System.Drawing.Point(0, 0);
-            this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(424, 123);
-            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picImage.TabIndex = 0;
-            this.picImage.TabStop = false;
-            // 
-            // txtCutomer
-            // 
-            this.txtCutomer.BackColor = System.Drawing.Color.White;
-            this.txtCutomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCutomer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCutomer.Location = new System.Drawing.Point(112, 76);
-            this.txtCutomer.Name = "txtCutomer";
-            this.txtCutomer.ReadOnly = true;
-            this.txtCutomer.Size = new System.Drawing.Size(306, 27);
-            this.txtCutomer.TabIndex = 45;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRefresh.Image = global::WIMARTS.DISPATCH.Properties.Resources.th;
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRefresh.Location = new System.Drawing.Point(386, 43);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(32, 27);
-            this.btnRefresh.TabIndex = 44;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 111);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 19);
-            this.label9.TabIndex = 43;
-            this.label9.Text = "Transporter";
-            // 
-            // txtTransporter
-            // 
-            this.txtTransporter.BackColor = System.Drawing.Color.White;
-            this.txtTransporter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTransporter.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransporter.Location = new System.Drawing.Point(112, 109);
-            this.txtTransporter.Name = "txtTransporter";
-            this.txtTransporter.ReadOnly = true;
-            this.txtTransporter.Size = new System.Drawing.Size(306, 27);
-            this.txtTransporter.TabIndex = 42;
             // 
             // label6
             // 
@@ -322,7 +244,7 @@
             this.txtTotalQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalQty.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Bold);
             this.txtTotalQty.ForeColor = System.Drawing.Color.White;
-            this.txtTotalQty.Location = new System.Drawing.Point(286, 291);
+            this.txtTotalQty.Location = new System.Drawing.Point(286, 290);
             this.txtTotalQty.Name = "txtTotalQty";
             this.txtTotalQty.ReadOnly = true;
             this.txtTotalQty.Size = new System.Drawing.Size(132, 86);
@@ -346,7 +268,7 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(286, 247);
+            this.label4.Location = new System.Drawing.Point(286, 246);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 40);
             this.label4.TabIndex = 36;
@@ -369,7 +291,7 @@
             this.txtBadQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBadQty.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Bold);
             this.txtBadQty.ForeColor = System.Drawing.Color.White;
-            this.txtBadQty.Location = new System.Drawing.Point(146, 291);
+            this.txtBadQty.Location = new System.Drawing.Point(146, 290);
             this.txtBadQty.Name = "txtBadQty";
             this.txtBadQty.ReadOnly = true;
             this.txtBadQty.Size = new System.Drawing.Size(132, 86);
@@ -394,7 +316,7 @@
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(146, 247);
+            this.label8.Location = new System.Drawing.Point(146, 246);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(132, 40);
             this.label8.TabIndex = 35;
@@ -418,7 +340,7 @@
             this.txtGoodQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtGoodQty.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Bold);
             this.txtGoodQty.ForeColor = System.Drawing.Color.White;
-            this.txtGoodQty.Location = new System.Drawing.Point(6, 291);
+            this.txtGoodQty.Location = new System.Drawing.Point(6, 290);
             this.txtGoodQty.Name = "txtGoodQty";
             this.txtGoodQty.ReadOnly = true;
             this.txtGoodQty.Size = new System.Drawing.Size(132, 86);
@@ -432,7 +354,7 @@
             this.cmbDispMaster.FormattingEnabled = true;
             this.cmbDispMaster.Location = new System.Drawing.Point(112, 43);
             this.cmbDispMaster.Name = "cmbDispMaster";
-            this.cmbDispMaster.Size = new System.Drawing.Size(268, 27);
+            this.cmbDispMaster.Size = new System.Drawing.Size(271, 27);
             this.cmbDispMaster.TabIndex = 2;
             this.cmbDispMaster.SelectedIndexChanged += new System.EventHandler(this.cmbiDspMaster_SelectedIndexChanged);
             // 
@@ -442,7 +364,7 @@
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(6, 247);
+            this.label7.Location = new System.Drawing.Point(6, 246);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(132, 40);
             this.label7.TabIndex = 34;
@@ -499,15 +421,25 @@
             // pnlButtons
             // 
             this.pnlButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlButtons.Controls.Add(this.lblapmode);
             this.pnlButtons.Controls.Add(this.btnMode);
             this.pnlButtons.Controls.Add(this.btnSettings);
             this.pnlButtons.Controls.Add(this.btnStartInsp);
             this.pnlButtons.Controls.Add(this.btnStopInsp);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 535);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 542);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(426, 123);
             this.pnlButtons.TabIndex = 29;
+            // 
+            // lblapmode
+            // 
+            this.lblapmode.AutoSize = true;
+            this.lblapmode.Location = new System.Drawing.Point(310, 17);
+            this.lblapmode.Name = "lblapmode";
+            this.lblapmode.Size = new System.Drawing.Size(37, 13);
+            this.lblapmode.TabIndex = 5;
+            this.lblapmode.Text = "label9";
             // 
             // btnMode
             // 
@@ -591,7 +523,7 @@
             // splitDispDetails.Panel2
             // 
             this.splitDispDetails.Panel2.Controls.Add(this.splitScanner);
-            this.splitDispDetails.Size = new System.Drawing.Size(720, 658);
+            this.splitDispDetails.Size = new System.Drawing.Size(720, 665);
             this.splitDispDetails.SplitterDistance = 287;
             this.splitDispDetails.TabIndex = 1;
             // 
@@ -745,7 +677,7 @@
             // 
             this.splitScanner.Panel2.Controls.Add(this.dataGridView1);
             this.splitScanner.Panel2.Controls.Add(this.dgvScannedData);
-            this.splitScanner.Size = new System.Drawing.Size(720, 367);
+            this.splitScanner.Size = new System.Drawing.Size(720, 374);
             this.splitScanner.SplitterDistance = 58;
             this.splitScanner.TabIndex = 0;
             // 
@@ -806,7 +738,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 181);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 188);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -883,7 +815,7 @@
             this.dgvScannedData.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvScannedData.RowTemplate.Height = 30;
             this.dgvScannedData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvScannedData.Size = new System.Drawing.Size(718, 303);
+            this.dgvScannedData.Size = new System.Drawing.Size(718, 310);
             this.dgvScannedData.TabIndex = 1;
             // 
             // SrNoColumn
@@ -901,7 +833,7 @@
             this.ProductCodeColumn.HeaderText = "Product Code";
             this.ProductCodeColumn.Name = "ProductCodeColumn";
             this.ProductCodeColumn.ReadOnly = true;
-            this.ProductCodeColumn.Width = 116;
+            this.ProductCodeColumn.Width = 127;
             // 
             // BatchNameColumn
             // 
@@ -948,7 +880,7 @@
             this.lblSensor1Count.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblSensor1Count.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSensor1Count.ForeColor = System.Drawing.Color.White;
-            this.lblSensor1Count.Location = new System.Drawing.Point(759, 0);
+            this.lblSensor1Count.Location = new System.Drawing.Point(695, 0);
             this.lblSensor1Count.Name = "lblSensor1Count";
             this.lblSensor1Count.Size = new System.Drawing.Size(70, 47);
             this.lblSensor1Count.TabIndex = 61;
@@ -962,7 +894,7 @@
             this.lblSensor2Count.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblSensor2Count.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSensor2Count.ForeColor = System.Drawing.Color.White;
-            this.lblSensor2Count.Location = new System.Drawing.Point(829, 0);
+            this.lblSensor2Count.Location = new System.Drawing.Point(765, 0);
             this.lblSensor2Count.Name = "lblSensor2Count";
             this.lblSensor2Count.Size = new System.Drawing.Size(70, 47);
             this.lblSensor2Count.TabIndex = 62;
@@ -971,30 +903,28 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnHWCIndic);
+            this.flowLayoutPanel1.Controls.Add(this.ctrlPLCDeck1);
             this.flowLayoutPanel1.Controls.Add(this.btnCamIndicator);
             this.flowLayoutPanel1.Controls.Add(this.btnScanIndicator);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(899, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(835, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 47);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(315, 47);
             this.flowLayoutPanel1.TabIndex = 60;
             // 
-            // btnHWCIndic
+            // ctrlPLCDeck1
             // 
-            this.btnHWCIndic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHWCIndic.BackColor = System.Drawing.Color.MistyRose;
-            this.btnHWCIndic.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnHWCIndic.FlatAppearance.BorderSize = 2;
-            this.btnHWCIndic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHWCIndic.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHWCIndic.Location = new System.Drawing.Point(171, 3);
-            this.btnHWCIndic.Name = "btnHWCIndic";
-            this.btnHWCIndic.Size = new System.Drawing.Size(77, 41);
-            this.btnHWCIndic.TabIndex = 54;
-            this.btnHWCIndic.Text = "HWC";
-            this.btnHWCIndic.UseVisualStyleBackColor = false;
+            this.ctrlPLCDeck1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctrlPLCDeck1.BackColor = System.Drawing.Color.MistyRose;
+            this.ctrlPLCDeck1.DisplayName = "HWC";
+            this.ctrlPLCDeck1.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.ctrlPLCDeck1.Location = new System.Drawing.Point(225, 4);
+            this.ctrlPLCDeck1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ctrlPLCDeck1.MaximumSize = new System.Drawing.Size(400, 150);
+            this.ctrlPLCDeck1.Name = "ctrlPLCDeck1";
+            this.ctrlPLCDeck1.Size = new System.Drawing.Size(87, 41);
+            this.ctrlPLCDeck1.TabIndex = 5;
             // 
             // btnCamIndicator
             // 
@@ -1004,7 +934,7 @@
             this.btnCamIndicator.FlatAppearance.BorderSize = 2;
             this.btnCamIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCamIndicator.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCamIndicator.Location = new System.Drawing.Point(88, 3);
+            this.btnCamIndicator.Location = new System.Drawing.Point(142, 3);
             this.btnCamIndicator.Name = "btnCamIndicator";
             this.btnCamIndicator.Size = new System.Drawing.Size(77, 41);
             this.btnCamIndicator.TabIndex = 56;
@@ -1019,7 +949,7 @@
             this.btnScanIndicator.FlatAppearance.BorderSize = 2;
             this.btnScanIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScanIndicator.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScanIndicator.Location = new System.Drawing.Point(5, 3);
+            this.btnScanIndicator.Location = new System.Drawing.Point(59, 3);
             this.btnScanIndicator.Name = "btnScanIndicator";
             this.btnScanIndicator.Size = new System.Drawing.Size(77, 41);
             this.btnScanIndicator.TabIndex = 59;
@@ -1032,9 +962,9 @@
             this.lblLicHolder.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblLicHolder.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLicHolder.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblLicHolder.Location = new System.Drawing.Point(483, 0);
+            this.lblLicHolder.Location = new System.Drawing.Point(386, 0);
             this.lblLicHolder.Name = "lblLicHolder";
-            this.lblLicHolder.Size = new System.Drawing.Size(282, 47);
+            this.lblLicHolder.Size = new System.Drawing.Size(329, 47);
             this.lblLicHolder.TabIndex = 57;
             this.lblLicHolder.Text = "NILON\'s Enterprises Pvt. Ltd.";
             this.lblLicHolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1047,9 +977,9 @@
             this.lblLicensedTo.ForeColor = System.Drawing.Color.Maroon;
             this.lblLicensedTo.Location = new System.Drawing.Point(292, 0);
             this.lblLicensedTo.Name = "lblLicensedTo";
-            this.lblLicensedTo.Size = new System.Drawing.Size(191, 47);
+            this.lblLicensedTo.Size = new System.Drawing.Size(94, 47);
             this.lblLicensedTo.TabIndex = 58;
-            this.lblLicensedTo.Text = "SYSTEM LICENSED TO:";
+            this.lblLicensedTo.Text = "SYSTEM LICENSEE";
             this.lblLicensedTo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblProductName
@@ -1070,7 +1000,7 @@
             // 
             this.SplitStatus.BackColor = System.Drawing.Color.Transparent;
             this.SplitStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SplitStatus.Location = new System.Drawing.Point(0, 705);
+            this.SplitStatus.Location = new System.Drawing.Point(0, 712);
             this.SplitStatus.Name = "SplitStatus";
             // 
             // SplitStatus.Panel1
@@ -1113,10 +1043,89 @@
             this.lblStatusBar.Text = "SYSTEM IS IN STANDBY MODE";
             this.lblStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(6, 111);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 19);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "Transporter";
+            // 
+            // txtTransporter
+            // 
+            this.txtTransporter.BackColor = System.Drawing.Color.White;
+            this.txtTransporter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTransporter.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransporter.Location = new System.Drawing.Point(112, 109);
+            this.txtTransporter.Name = "txtTransporter";
+            this.txtTransporter.ReadOnly = true;
+            this.txtTransporter.Size = new System.Drawing.Size(306, 27);
+            this.txtTransporter.TabIndex = 44;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.BackColor = System.Drawing.Color.White;
+            this.txtCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCustomer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomer.Location = new System.Drawing.Point(112, 76);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(306, 27);
+            this.txtCustomer.TabIndex = 43;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::WIMARTS.DISPATCH.Properties.Resources.th;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefresh.Location = new System.Drawing.Point(386, 43);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(32, 27);
+            this.btnRefresh.TabIndex = 45;
+            this.btnRefresh.Text = " ";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(0, 118);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(93, 0);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Black;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(93, 118);
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
+            // picImage
+            // 
+            this.picImage.BackColor = System.Drawing.Color.White;
+            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
+            this.picImage.Location = new System.Drawing.Point(0, 0);
+            this.picImage.Name = "picImage";
+            this.picImage.Size = new System.Drawing.Size(424, 146);
+            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picImage.TabIndex = 0;
+            this.picImage.TabStop = false;
+            // 
             // FrmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(1150, 750);
+            this.ClientSize = new System.Drawing.Size(1150, 757);
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.SplitStatus);
             this.Controls.Add(this.pnlHeading);
@@ -1133,8 +1142,6 @@
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
             this.splitMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.splitDetails.Panel1.ResumeLayout(false);
             this.splitDetails.Panel2.ResumeLayout(false);
             this.splitDetails.ResumeLayout(false);
@@ -1142,8 +1149,8 @@
             this.splitDispMasterDetails.Panel2.ResumeLayout(false);
             this.splitDispMasterDetails.Panel2.PerformLayout();
             this.splitDispMasterDetails.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.pnlButtons.ResumeLayout(false);
+            this.pnlButtons.PerformLayout();
             this.splitDispDetails.Panel1.ResumeLayout(false);
             this.splitDispDetails.Panel2.ResumeLayout(false);
             this.splitDispDetails.ResumeLayout(false);
@@ -1161,6 +1168,9 @@
             this.SplitStatus.Panel1.ResumeLayout(false);
             this.SplitStatus.Panel2.ResumeLayout(false);
             this.SplitStatus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1188,7 +1198,6 @@
         private System.Windows.Forms.Button btnStartInsp;
         private System.Windows.Forms.Button btnStopInsp;
         private System.Windows.Forms.Panel pnlHeading;
-        private System.Windows.Forms.Button btnHWCIndic;
         private System.Windows.Forms.Button btnCamIndicator;
         private System.Windows.Forms.Label lblLicHolder;
         private System.Windows.Forms.Label lblLicensedTo;
@@ -1233,10 +1242,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Result;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultEjection;
+        private rcs.CONTROLS.CtrlPLCDeck ctrlPLCDeck1;
+        private System.Windows.Forms.Label lblapmode;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTransporter;
+        private System.Windows.Forms.TextBox txtCustomer;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.TextBox txtCutomer;
     }
 }
 

@@ -97,7 +97,7 @@ namespace RedCommunication.SERIAL
 
                 if (DataReceived != null)
                 {
-                    String SerialIn = System.Text.Encoding.ASCII.GetString(readBuffer, 0, count);
+                    String SerialIn = System.Text.Encoding.UTF8.GetString(readBuffer, 0, count);
                     DataReceived(SerialIn, Settings.Port.PortName, Index);
                 }
                 if (DataReceivedBytes != null)
@@ -154,7 +154,7 @@ namespace RedCommunication.SERIAL
                         // is available on the port, up until the ReadTimeout milliseconds
                         // have elapsed, at which time a TimeoutException will be thrown.
                         int count = _serialPort.Read(readBuffer, 0, _serialPort.ReadBufferSize);
-                        String SerialIn = System.Text.Encoding.ASCII.GetString(readBuffer, 0, count);
+                        String SerialIn = System.Text.Encoding.UTF8.GetString(readBuffer, 0, count);
                         if (DataReceived != null) 
                             DataReceived(SerialIn, Settings.Port.PortName, Index);
                     }
@@ -270,9 +270,23 @@ namespace RedCommunication.SERIAL
         }
         /// <summary> Get a list of the available ports. Already opened ports
         /// are not returend. </summary>
-        public static string[] GetAvailablePorts()
+        public static string GetAvailablePorts()
         {
-            return SerialPort.GetPortNames();
+            try
+            {
+                string outstr = string.Empty;
+                string[] portss = SerialPort.GetPortNames();
+                foreach (string item in portss)
+                {
+                    outstr += item + ",";
+                }
+
+                return outstr;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         /// <summary>Send data to the serial port after appending line ending. </summary>
         /// <param name="data">An string containing the data to send. </param>

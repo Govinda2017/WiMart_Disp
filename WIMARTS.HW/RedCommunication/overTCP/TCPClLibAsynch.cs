@@ -8,6 +8,8 @@ namespace RedCommunication.TCP
 {
     public class TCPClLibAsynch
     {
+        public string ConnectorName { get; set; }
+
         const int BuffSize = 1024;
         public int Index { get; private set; }
         private TcpClient tcpClient = null;
@@ -77,6 +79,7 @@ namespace RedCommunication.TCP
                     this.tcpClient.BeginConnect(hostName, serviceport, new AsyncCallback(OnConnectMsg), tcpClient);
                 }
             }
+         
             catch (SocketException ex)
             {
                 Trace.TraceError("{0},{1}{2}", DateTime.Now.ToString(), ex.Message, ex.StackTrace);
@@ -104,13 +107,16 @@ namespace RedCommunication.TCP
             }
         }
 
-        public void SendMessage(string message)
+        public bool SendMessage(string message)
         {
             if (string.IsNullOrEmpty(message) == true)
-                throw new ArgumentException("Expected StringMessage");
+            {
+                //throw new ArgumentException("Expected StringMessage");
+                return false;
+            }
 
             if (!this.IsConnected)// Check! I am connected
-                return;
+                return false;
 
             byte[] sendBuffer = ConvertStringToBytes(message);
             tcpStream.Write(sendBuffer, 0, sendBuffer.Length);
@@ -122,16 +128,21 @@ namespace RedCommunication.TCP
             //        sw.Write(message);
             //    }
             //}
+            return true;
         }
-        public void SendMessage(byte[] message, int msgLen)
+        public bool SendMessage(byte[] message, int msgLen)
         {
             if (message == null || msgLen <= 0)
-                throw new ArgumentException("Expected StringMessage");
+            {
+                //throw new ArgumentException("Expected StringMessage");
+                return false;
+            }
 
             if (!this.IsConnected)// Check! I am connected
-                return;
+                return false;
 
             tcpStream.Write(message, 0, msgLen);
+            return true;
         }
 
         private void OnConnectMsg(IAsyncResult ar)
@@ -143,7 +154,8 @@ namespace RedCommunication.TCP
                     if (this.IsConnected)
                     {
                         tcpStream = tcpClient.GetStream();
-                        tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.None, new AsyncCallback(OnDataReceive), m_byBuff);
+                        //tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.None, new AsyncCallback(OnDataReceive), m_byBuff);
+                        tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.Partial, new AsyncCallback(OnDataReceive), m_byBuff);
                         if (OnConnect != null)
                             OnConnect(Index, true);
                     }
@@ -155,7 +167,8 @@ namespace RedCommunication.TCP
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    //throw ex;
+                    Trace.TraceError("{0}, OnConnectMsg(...), {1}", DateTime.Now.ToString(), ex.ToString());
                 }
             }
         }
@@ -177,36 +190,39 @@ namespace RedCommunication.TCP
                             }
                             else if (OnReceiveString != null)
                             {
-                                string sRecieved = Encoding.ASCII.GetString(m_byBuff, 0, nBytesRec);
+                                string sRecieved = Encoding.UTF8.GetString(m_byBuff, 0, nBytesRec);
                                 OnReceiveString(Index, sRecieved);
                             }
-                            tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.None, new AsyncCallback(OnDataReceive), m_byBuff);
+                            //tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.None, new AsyncCallback(OnDataReceive), m_byBuff);
+                            tcpClient.Client.BeginReceive(m_byBuff, 0, m_byBuff.Length, SocketFlags.Partial, new AsyncCallback(OnDataReceive), m_byBuff);
                         }
                         else
                         {
                             // If no data was recieved then the connection is probably dead
-                            Trace.TraceError("No data!, Client {0} disconnected", tcpClient.Client.RemoteEndPoint);
-                            tcpClient.Close();
+                            Trace.TraceError("No data!, Client {0} @ {1} disconnected", ConnectorName, tcpClient.Client.RemoteEndPoint);
                             if (OnDisconnect != null)
                                 OnDisconnect(Index);
+
+                            tcpClient.Close();
                         }
                     }
                 }
                 catch (SocketException ex)
                 {
+                    Trace.TraceError("{0},{1}{2}", DateTime.Now.ToString(), ex.Message, ex.StackTrace);
                     if (OnDisconnect != null)
                         OnDisconnect(Index);
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError("No data!, Client {0} disconnected", tcpClient.Client.RemoteEndPoint);
+                    Trace.TraceError("{0},No data!, Client {1} disconnected, {2}", DateTime.Now.ToString(), ConnectorName, ex.ToString());
                 }
             }
         }
 
         byte[] ConvertStringToBytes(string str)
         {
-            return ASCIIEncoding.ASCII.GetBytes(str);
+            return ASCIIEncoding.UTF8.GetBytes(str);
         }
     }
 }

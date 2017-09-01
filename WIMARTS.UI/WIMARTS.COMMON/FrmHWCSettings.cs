@@ -75,11 +75,21 @@ namespace WIMARTS.COMMON
         }
 
         private void BindPorts()
-        {
-            string[] SerialPorts = CommPort.GetAvailablePorts();
+        {            
+            string SerialPorts = CommPort.GetAvailablePorts();
+            string[] portList = SerialPorts.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
             cmbSerialPort.Items.Clear();
-            foreach (string port in SerialPorts)
-                cmbSerialPort.Items.Add(port);
+            for (int i = 0; i < portList.Length; ++i)
+            {
+                string name = portList[i];
+                if (string.IsNullOrEmpty(name) == false)
+                    cmbSerialPort.Items.Add(name);
+                //if (name == comport.Settings.Port.PortName)
+                //    found = i;
+            }
+            //if (portList.Length > 0)
+            //    comboBox1.SelectedIndex = found;
         }
 
         private void LoadSettings()

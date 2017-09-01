@@ -11,11 +11,10 @@ using WIMARTS.UTIL;
 using WIMARTS.CODEMGR;
 using WIMARTS.DB.BLL;
 using System.Diagnostics;
+using rcs.CONTROLS;
 
 namespace WIMARTS.DISPATCH
 {
-    #region Class FrmMain
-
     public partial class FrmMain
     {
         #region UI Functions
@@ -24,13 +23,14 @@ namespace WIMARTS.DISPATCH
         {
             if (HasController == true)
             {
-                if (mHWControl != null && mHWControl.IsConnected())
-                {
-                    mHWControl.CURRENTMODEEXIT();
-                    Thread.Sleep(200);
-                    mHWControl.DRESET();
-                    RetryCounts++;
-                }
+                //if (mHWControl != null && mHWControl.IsConnected())
+                //{
+                //    mHWControl.CURRENTMODEEXIT();
+                //    Thread.Sleep(200);
+                //    mHWControl.DRESET();
+                //    RetryCounts++;
+                //}
+                ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorClear);
             }
             else
             {
@@ -46,7 +46,7 @@ namespace WIMARTS.DISPATCH
                 {
                     string msg = "Kindly Check Dispatch details before Loading...." + Environment.NewLine
                         + "    Dispatch Number: " + mJobMaster.GDN + Environment.NewLine
-                        + "    Customer Name: " + txtCutomer.Text + Environment.NewLine
+                        + "    Customer Name: " + txtCustomer.Text + Environment.NewLine
                         + "    Vehicle Number: " + mJobMaster.VehicleNo + Environment.NewLine + Environment.NewLine
                         + "Press OK to Proceed.";
 
@@ -63,8 +63,9 @@ namespace WIMARTS.DISPATCH
             {
                 if (HasController == true)
                 {
-                    mHWControl.ASTARTINSP();
-                    RetryCounts++;
+                    //mHWControl.ASTARTINSP();
+                    //RetryCounts++;
+                    ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorStart);
                 }
                 else
                     m_AppMode = AppMode.Online;
@@ -73,8 +74,9 @@ namespace WIMARTS.DISPATCH
             {
                 if (HasController == true)
                 {
-                    mHWControl.TSTARTCONV(1);
-                    RetryCounts++;
+                    //mHWControl.TSTARTCONV(1);
+                    //RetryCounts++;
+                    ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorFreeMove);
                 }
                 else
                     m_AppMode = AppMode.ConveyorStart;
@@ -83,11 +85,7 @@ namespace WIMARTS.DISPATCH
 
         private void ExitClicked()
         {
-            if (m_AppMode == AppMode.TestMode)
-            {
-                m_AppMode = AppMode.ReadyMode;
-            }
-            else if (m_AppMode == AppMode.ReadyMode || m_AppMode == AppMode.LoadJob || m_AppMode == AppMode.Offline || m_AppMode == AppMode.ConveyorStop)
+            if (m_AppMode == AppMode.ReadyMode || m_AppMode == AppMode.LoadJob || m_AppMode == AppMode.Offline || m_AppMode == AppMode.ConveyorStop)
             {
                 m_AppMode = AppMode.ExitJob;
             }
@@ -95,8 +93,9 @@ namespace WIMARTS.DISPATCH
             {
                 if (HasController == true)
                 {
-                    mHWControl.ASTOPINSP();
-                    RetryCounts++;
+                    //mHWControl.ASTOPINSP();
+                    //RetryCounts++;
+                    ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorStop);
                 }
                 else
                     m_AppMode = AppMode.Offline;
@@ -105,8 +104,9 @@ namespace WIMARTS.DISPATCH
             {
                 if (HasController == true)
                 {
-                    mHWControl.TSTOPCONV();
-                    RetryCounts++;
+                    //mHWControl.TSTOPCONV();
+                    //RetryCounts++;
+                    ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorStop);
                 }
                 else
                     m_AppMode = AppMode.ConveyorStop;
@@ -140,11 +140,13 @@ namespace WIMARTS.DISPATCH
 
         private void ExitApplication()
         {
-            if (mHWControl != null)
-            {
-                mHWControl.Disconnect();
-                mHWControl = null;
-            }
+            //if (mHWControl != null)
+            //{
+            //    mHWControl.Disconnect();
+            //    mHWControl = null;
+            //}
+            ctrlPLCDeck1.PerformDisconnect();
+
             if (mInspectDev1 != null)
             {
                 mInspectDev1.Disconnect();
@@ -177,6 +179,7 @@ namespace WIMARTS.DISPATCH
         private void BindDetails()
         {
             List<ProductMaster> lstProducts = bllMgr.ProductMasterBLL.GetProductMasters();
+
             DDProductCodeColumn.DataSource = lstProducts;
             DDProductCodeColumn.DisplayMember = "Code";
             DDProductCodeColumn.ValueMember = "Code";
@@ -194,7 +197,7 @@ namespace WIMARTS.DISPATCH
                 txtVehicleNo.Clear();
                 txtDriverName.Clear();
                 cmbStatus.SelectedIndex = -1;
-                txtCutomer.Text = "";
+                txtCustomer.Text = "";
 
                 dgvDispDetails.Rows.Clear();
                 dgvScannedData.Rows.Clear();
@@ -213,13 +216,14 @@ namespace WIMARTS.DISPATCH
                     cmbStatus.SelectedIndex = oDisp.Status;
                     CustomerMaster oCustomerMaster = bllMgr.CustomerMasterBLL.GetCustomerMaster(oDisp.CustID);
                     if (oCustomerMaster != null)
-                        txtCutomer.Text = oCustomerMaster.CustName;
+                        txtCustomer.Text = oCustomerMaster.CustName;
                     if (oDisp.TransporterID != null)
                     {
                         TransporterDetails oTransporterDetails = bllMgr.TransporterDetailsBLL.GetTransporterDetails(Convert.ToInt32(oDisp.TransporterID));
                         if (oTransporterDetails != null)
                             txtTransporter.Text = oTransporterDetails.TransporterName;
                     }
+
                     TotalQuantity = 0;
                     lstDispDetails = bllMgr.DispatchDetailsBLL.GetDispatchDetailsByDispMaster(DispatchDetailsBLL.Flag.Master, Convert.ToString(oDisp.DispMasterID));
                     foreach (DispatchDetails item in lstDispDetails)
@@ -415,8 +419,9 @@ namespace WIMARTS.DISPATCH
             {
                 if (HasController == true && ManualMode == false)
                 {
-                    mHWControl.ACAMRESPONSE(TriggerNo, true);
-                    RetryCounts++;
+                    //mHWControl.ACAMRESPONSE(TriggerNo, true);
+                    //RetryCounts++;
+                    ctrlPLCDeck1.PerformRejectionOperation(true);
                 }
             }
             else
@@ -425,13 +430,15 @@ namespace WIMARTS.DISPATCH
                 {
                     if (ManualMode == true)
                     {
-                        mHWControl.TSTOPCONV();
-                        RetryCounts++;
+                        //mHWControl.TSTOPCONV();//TBV
+                        //RetryCounts++;
+                        ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorStop);
                     }
                     else
                     {
-                        mHWControl.ACAMRESPONSE(TriggerNo, false);
-                        RetryCounts++;
+                        //mHWControl.ACAMRESPONSE(TriggerNo, false);
+                        //RetryCounts++;
+                        ctrlPLCDeck1.PerformRejectionOperation(false);
                     }
                 }
             }
@@ -825,7 +832,8 @@ namespace WIMARTS.DISPATCH
             {
                 UpdateJobMasterStatus(Convert.ToInt32(BLLManager.MasterStatus.Completed), null, DateTime.Now);
                 if (HasController == true)
-                    mHWControl.ASTARTINSP();
+                    //mHWControl.ASTARTINSP();
+                    ctrlPLCDeck1.PerformMachineOperation(PLCnRUN_if.RunAction.plc_ConveyorStart);
                 else
                     m_AppMode = AppMode.Offline;
                 UpdateText(lblScanStatus, "Dispatch Quantity completed, Load New Dispatch...");
@@ -836,31 +844,34 @@ namespace WIMARTS.DISPATCH
 
         #region Status Updates
 
-        private void CheckSensor2Trigger(string strNo)
+        private void CheckSensor2Trigger(string strTriggerNumber)
         {
             try
             {
-                int no = 0;
-                Int32.TryParse(strNo, out no);
-                Sensor2Count = no;
-                //if (Sensor2Count > Sensor1Count && (Sensor1Count != 1 || Sensor2Count != 10))
-                if (Sens2TotalCount > Sens1TotalCount)
-                {
-                    DialogResult dr = RedMessageBox.Show("Major Blunder with Hardware\nSecond Sensor count Exceeded than first\nClick OK to Reset or \nClick Cancel and adjust sensor count.", "WIMARTS", RedMessageBox.RedMessageBoxButtons.OKCancel, 0);
-                    if (dr == DialogResult.OK)
-                    {
-                        _RetryCounts = 1;
-                        StartApplication();
-                    }
-                }
+                int TriggerNumber = 0;
+                Int32.TryParse(strTriggerNumber, out TriggerNumber);
+                CheckSensor2Trigger(TriggerNumber);
             }
             catch (Exception ex)
             {
                 Trace.TraceError("{0}, Error:{1}, {2}", DateTime.Now, ex.Message, ex.StackTrace);
             }
-
         }
-
+        private void CheckSensor2Trigger(int TriggerNumber)
+        {
+            Sensor2Count = TriggerNumber;
+            //if (Sensor2Count > Sensor1Count && (Sensor1Count != 1 || Sensor2Count != 10))
+            if (Sens2TotalCount > Sens1TotalCount)
+            {
+                string Msg = "Major Blunder with Hardware.\nSecond Sensor count Exceeded than first\nClick OK to Reset OR \nClick Cancel and adjust sensor count.";
+                DialogResult dr = RedMessageBox.Show(Msg, "WIMARTS", RedMessageBox.RedMessageBoxButtons.OKCancel, 0);
+                if (dr == DialogResult.OK)
+                {
+                    _RetryCounts = 1;
+                    StartApplication();
+                }
+            }
+        }
         private void UpdateStatusColor(Control ctrl, bool isValid)
         {
             if (ctrl.InvokeRequired == true)
@@ -1290,6 +1301,4 @@ namespace WIMARTS.DISPATCH
 
         #endregion SaveInThreadTrial
     }
-
-    #endregion Class FrmMain
 }

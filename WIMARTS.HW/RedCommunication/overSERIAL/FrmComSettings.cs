@@ -13,10 +13,14 @@ namespace RedCommunication.SERIAL
             comport = port;
             InitializeComponent();
             int found = 0;
-            string[] portList = CommPort.GetAvailablePorts();
+
+            string SerialPorts = CommPort.GetAvailablePorts();
+            string[] portList = SerialPorts.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            
             for (int i=0; i<portList.Length; ++i)
             {
                 string name = portList[i];
+                if (string.IsNullOrEmpty(name) == false) 
                 comboBox1.Items.Add(name);
                 if (name == comport.Settings.Port.PortName)
                     found = i;

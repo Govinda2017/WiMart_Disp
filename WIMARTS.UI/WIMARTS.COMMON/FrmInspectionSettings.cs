@@ -140,14 +140,24 @@ namespace WIMARTS.COMMON
 
         private void BindPorts()
         {
-            string[] SerialPorts = CommPort.GetAvailablePorts();
-            cmbSerialPort1.Items.Clear();
-            foreach (string port in SerialPorts)
-                cmbSerialPort1.Items.Add(port);
+            string SerialPorts = CommPort.GetAvailablePorts();
+            string[] portList = SerialPorts.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
+            cmbSerialPort1.Items.Clear();
             cmbSerialPort2.Items.Clear();
-            foreach (string port in SerialPorts)
-                cmbSerialPort2.Items.Add(port);
+            for (int i = 0; i < portList.Length; ++i)
+            {
+                string name = portList[i];
+                if (string.IsNullOrEmpty(name) == false)
+                {
+                    cmbSerialPort1.Items.Add(name);
+                    cmbSerialPort2.Items.Add(name);
+                }
+                //if (name == comport.Settings.Port.PortName)
+                //    found = i;
+            }
+            //if (portList.Length > 0)
+            //    comboBox1.SelectedIndex = found;
         }
 
         private void btnPortSettings2_Click(object sender, EventArgs e)

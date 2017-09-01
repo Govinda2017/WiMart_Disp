@@ -109,6 +109,9 @@ namespace WIMARTS.REPORTS
 namespace WIMARTS.REPORTS
 {
 }
+namespace WIMARTS.REPORTS
+{
+}
 namespace WIMARTS.MANAGER
 {
 }

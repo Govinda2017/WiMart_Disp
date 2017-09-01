@@ -142,7 +142,6 @@ namespace WIMARTS.DB.BLL
             set { _UIDLineHolderBLL = value; }
         }
 
-
         private TransporterDetailsBLL _TransporterDetailsBLL;
 
         public TransporterDetailsBLL TransporterDetailsBLL
@@ -150,6 +149,7 @@ namespace WIMARTS.DB.BLL
             get { return _TransporterDetailsBLL; }
             set { _TransporterDetailsBLL = value; }
         }
+
 		public BLLManager()
 		{
             CustomerMasterBLL = new BLL.CustomerMasterBLL();

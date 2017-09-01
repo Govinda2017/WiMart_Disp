@@ -85,10 +85,18 @@ namespace WIMARTS.UTIL
         {
             get { return SettingDir + "\\HWCSettings.rxd"; } 
         }
-
+        public static string HWConfigPath_PLC
+        {
+            get { return SettingDir + "\\HWConfigPath_PLC.rdat"; }
+        }
+        public static string PLC_Setup
+        {
+            get { return SettingDir + "\\PLC_Setup.rdat"; }
+        }
         public static string HWCValues
         {
             get { return SettingDir + "\\HWCValues.rxd"; }
         }
+
     }
 }

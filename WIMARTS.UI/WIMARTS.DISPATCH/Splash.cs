@@ -13,6 +13,11 @@ using System.Diagnostics;
 using WIMARTS.DB.BLL;
 using WIMARTS.DB.BusinessObjects;
 using WIMARTS.COMMON;
+using WIMARTS.UTIL;
+using rcs.CONTROLS;
+using rSys;
+using System.IO;
+using WIMARTS.UTIL.SystemIntegrity;
 
 namespace WIMARTS.DISPATCH
 {
@@ -42,7 +47,7 @@ namespace WIMARTS.DISPATCH
                 {
                     case HWCheck.Controller:
                         if (HasController)
-                            ConnectHWControl();
+                            ConnectHWControl_PLC(); //ConnectHWControl_EMB();
                         else
                         {
                             NextHwConnect = HWCheck.Camera1;
@@ -137,39 +142,102 @@ namespace WIMARTS.DISPATCH
 
         #region HWControl
 
-        private HWControl mHWControl;
+        //private HWControl mHWControl;
+        //private void ConnectHWControl_EMB()
+        //{
+        //    string SerialPort = UTIL.SystemIntegrity.Globals.HWCSettings.SerialPort;
+        //    mHWControl = new HWControl(SerialPort);
+        //    if (mHWControl != null)
+        //    {
+        //        UpdateStatus("Connecting Controller....");
+        //        mHWControl.Connect();
+        //        Thread.Sleep(100); 
+        //        if (mHWControl.IsConnected() == true)
+        //        {
+        //            UpdateProgressBar(50);
+        //            OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FINISHED");
+        //            Trace.TraceInformation("{0}, HW Controller Connected, ComPort:{1}", DateTime.Now, SerialPort);
+        //             NextHwConnect = HWCheck.Camera1;
+        //        }
+        //        else
+        //        {
+        //            OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FAILED");
+        //            UpdateStatus("HW Controller not found...");
+        //            Trace.TraceInformation("{0}, HW Controller not found, Check ComPort:{1}", DateTime.Now, SerialPort);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FAILED");
+        //        UpdateStatus("HW Controller not found...");
+        //        Trace.TraceInformation("{0}, HW Controller not found, Check ComPort:{1}", DateTime.Now, SerialPort);
+        //    }          
+              
+        //}
 
-        private void ConnectHWControl()
+        PLCHWController mHWController = null;
+        private void ConnectHWControl_PLC()
         {
-            string SerialPort = UTIL.SystemIntegrity.Globals.HWCSettings.SerialPort;
-            mHWControl = new HWControl(SerialPort);
-            if (mHWControl != null)
+            PLCSetup mPLCSetup = PLCSetup.Read(SettingsPath.PLC_Setup);
+            if (mPLCSetup == null)
+                throw new Exception("Failed to read the PLC_Setup data");
+
+            string configFilePath = SettingsPath.HWConfigPath_PLC;
+            if (File.Exists(configFilePath) == false)
+            {
+                MessageBox.Show("Machine Settings are not Configured. Kindly configure Machine Communication", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return ;
+            }
+
+            HWSettings mHWConSett = HWSettings.Read(configFilePath);
+
+            mHWController = new PLCHWController(mHWConSett.Communication, mHWConSett.ConnectAddress, mHWConSett.PrimaryPort);
+            
+            if (mHWController != null)
             {
                 UpdateStatus("Connecting Controller....");
-                mHWControl.Connect();
-                Thread.Sleep(100); 
-                if (mHWControl.IsConnected() == true)
+                
+                bool isConnected = mHWController.Connect();
+                Thread.Sleep(250);
+                if (isConnected ==true)
                 {
                     UpdateProgressBar(50);
                     OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FINISHED");
-                    Trace.TraceInformation("{0}, HW Controller Connected, ComPort:{1}", DateTime.Now, SerialPort);
-                     NextHwConnect = HWCheck.Camera1;
+                    Trace.TraceInformation("{0}, HW Controller Connected", DateTime.Now);
+                    Application.DoEvents();
+                    if (mHWController != null && mHWController.IsHWCConnected() == true)
+                    {
+
+                        List<PLCHMIOPParameterSettings> lstOPTest = mPLCSetup.List4PLCHMIOPParameterSettings.FindAll(item => item.RequiredInAutoTest == true);
+
+                        foreach (PLCHMIOPParameterSettings item in lstOPTest)
+                        {
+                            int ParamValue = DataConvert.IntegerWithBitValue(item.HMIOPParam_BitPosition, true);
+                            mHWController.SendMessage(PLCProtocol.RegisterValWrite, item.HMIOPParam_Register, ParamValue);
+                            Thread.Sleep(500);
+
+                            ParamValue = DataConvert.IntegerWithBitValue(item.HMIOPParam_BitPosition, false);
+                            mHWController.SendMessage(PLCProtocol.RegisterValWrite, item.HMIOPParam_Register, ParamValue);
+                            Thread.Sleep(250);                            
+                        }
+                    }
+                    NextHwConnect = HWCheck.Camera1;
                 }
                 else
                 {
                     OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FAILED");
                     UpdateStatus("HW Controller not found...");
-                    Trace.TraceInformation("{0}, HW Controller not found, Check ComPort:{1}", DateTime.Now, SerialPort);
+                    Trace.TraceInformation("{0}, HW Controller not found", DateTime.Now);
                 }
             }
             else
             {
                 OnUpdateMessage(statusDGid++, "VERIFICATION - CONTROLLER", "FAILED");
                 UpdateStatus("HW Controller not found...");
-                Trace.TraceInformation("{0}, HW Controller not found, Check ComPort:{1}", DateTime.Now, SerialPort);
-            }          
-              
+                Trace.TraceInformation("{0}, HW Controller not found", DateTime.Now);
+            }
         }
+
 
         #endregion HWControl
 
@@ -243,9 +311,14 @@ namespace WIMARTS.DISPATCH
 
         private void DisconectHWs()
         {
-            if (mHWControl != null && mHWControl.IsConnected() == true)
+            //if (mHWControl != null && mHWControl.IsConnected() == true)
+            //{
+            //    mHWControl.Disconnect(); mHWControl = null;
+            //    Trace.TraceInformation("{0}, HW Controller Disconnected", DateTime.Now);
+            //}
+            if (mHWController != null && mHWController.IsHWCConnected() == true)
             {
-                mHWControl.Disconnect(); mHWControl = null;
+                mHWController.DisConnect(); mHWController = null;
                 Trace.TraceInformation("{0}, HW Controller Disconnected", DateTime.Now);
             }
             Thread.Sleep(50);
@@ -261,6 +334,7 @@ namespace WIMARTS.DISPATCH
                 Trace.TraceInformation("{0}, Inspection Device 2 Disconnected", DateTime.Now);
             }
         }
+
         #endregion DisconnectHWs()
 
         #region OpenAPP

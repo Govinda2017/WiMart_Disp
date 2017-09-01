@@ -137,7 +137,7 @@
     <Compile Include="FrmTransporterMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTransporterMaster.Designer.cs">
+    <Compile Include="FrmTransporterMaster.designer.cs">
       <DependentUpon>FrmTransporterMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmUserManager.cs">

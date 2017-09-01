@@ -436,7 +436,7 @@ namespace RedCommunication.TCP
             string tdata = "<MSG>" + data + "</MSG>";
             Socket sock = state.workSocket;
             // Convert the string data to byte data using ASCII encoding.
-            byte[] byteData = Encoding.ASCII.GetBytes(tdata);
+            byte[] byteData = Encoding.UTF8.GetBytes(tdata);
 
             // Begin sending the data to the remote device.
             if (byteData.Length > 0)

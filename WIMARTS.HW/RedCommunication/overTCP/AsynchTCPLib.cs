@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Diagnostics;
 
 namespace RedCommunication.TCP
 {
@@ -110,6 +111,7 @@ namespace RedCommunication.TCP
 				}
 				catch (Exception ex)
 				{
+                    Trace.TraceError("{0},{1}{2}", DateTime.Now.ToString(), ex.Message, ex.StackTrace);
 					OnConnect(MyId, false);
 					return -1;
 				}
@@ -121,6 +123,7 @@ namespace RedCommunication.TCP
 				}
 				catch (Exception ex)
 				{
+                    Trace.TraceError("{0},{1}{2}", DateTime.Now.ToString(), ex.Message, ex.StackTrace);
 					OnConnect(MyId, false);
 					return -1;
 				}
@@ -140,26 +143,6 @@ namespace RedCommunication.TCP
 			}
 		}
         
-//		private void ProcessConnection(TcpClient client)
-//		{
-//			// set it up...
-//			_client = client;
-//
-//			// get the socket through reflection...
-//			PropertyInfo propertyInfo = _client.GetType().GetProperty("Client", BindingFlags.Instance | BindingFlags.NonPublic);
-//			if (propertyInfo == null)
-//				return;
-//
-//			Socket = (Socket)propertyInfo.GetValue(_client, null);
-//
-//			// spin up the threads...
-//			//add the two threads for Receive and transmit
-//			ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveThreadEntryPoint));
-//			ThreadPool.QueueUserWorkItem(new WaitCallback(SendThreadEntryPoint));
-//			_isConnected = true;
-//		}
-
-
 		public bool IsConnected
 		{
 			get { return (_Socket == null ? false : _Socket.Connected); }
@@ -292,7 +275,7 @@ namespace RedCommunication.TCP
                             }
                             else
                             {
-                                buff = Encoding.ASCII.GetBytes(message);
+                                buff = Encoding.UTF8.GetBytes(message);
 
                                 // send it...
                                 System.IAsyncResult iar;
@@ -331,7 +314,7 @@ namespace RedCommunication.TCP
 				int read = s.EndReceive(ar);
 				if (read > 0)
 				{
-					string msg = Encoding.ASCII.GetString(so.buffer, 0, read);
+					string msg = Encoding.UTF8.GetString(so.buffer, 0, read);
 					if (OnReceive != null)
 					{
 						OnReceive(MyId, msg);

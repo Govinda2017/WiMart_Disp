@@ -401,4 +401,180 @@ namespace WIMARTS.UTIL.SystemIntegrity
             }
         }
     }
+
+    public class HWSettings
+    {
+        string _HWName = string.Empty;
+        public string HWName
+        {
+            get { return _HWName; }
+            set { _HWName = value; }
+        }
+
+        string _ApplicationPath = string.Empty;
+        public string ApplicationPath
+        {
+            get { return _ApplicationPath; }
+            set { _ApplicationPath = value; }
+        }
+
+        string _ApplicationCaption = string.Empty;
+        public string ApplicationCaption
+        {
+            get { return _ApplicationCaption; }
+            set { _ApplicationCaption = value; }
+        }
+
+        bool _ActivateOperation = false;
+        public bool ActivateOperation
+        {
+            get { return _ActivateOperation; }
+            set { _ActivateOperation = value; }
+        }
+
+        string _HWDeviceName = "PLCController";
+        public string HWDeviceName
+        {
+            get { return _HWDeviceName; }
+            set { _HWDeviceName = value; }
+        }
+
+        string _Communication = "TCP";
+        public string Communication
+        {
+            get { return _Communication; }
+            set { _Communication = value; }
+        }
+
+        string _ConnectAddress = "127.0.0.1";
+        public string ConnectAddress
+        {
+            get { return _ConnectAddress; }
+            set { _ConnectAddress = value; }
+        }
+
+        int _PrimaryPort = 399;
+        public int PrimaryPort
+        {
+            get { return _PrimaryPort; }
+            set { _PrimaryPort = value; }
+        }
+
+        int _SecondaryPort = 400;
+        public int SecondaryPort
+        {
+            get { return _SecondaryPort; }
+            set { _SecondaryPort = value; }
+        }
+
+        bool _HasSecondaryComm4DR = false;    //DR: DataReading
+        public bool HasSecondaryComm4DR
+        {
+            get { return _HasSecondaryComm4DR; }
+            set { _HasSecondaryComm4DR = value; }
+        }
+
+        
+        PLCConfigs _PLCConfig = null;
+        public PLCConfigs PLCConfig
+        {
+            get { return _PLCConfig; }
+            set { _PLCConfig = value; }
+        }
+
+        /// <summary>
+        /// Used in Data Server for Input Data Management as 0: Ignore Incoming Data, 1: Process Data for Count Update
+        /// </summary>
+        int _DataOperationAction_T1 = 0;
+        public int DataOperationAction_T1
+        {
+            get { return _DataOperationAction_T1; }
+            set { _DataOperationAction_T1 = value; }
+        }
+
+        /// <summary>
+        /// Used in Data Server for Output Data Management as 0: Ignore Outgoing Data, 1: Send Data to connected client
+        /// </summary>
+        int _DataOperationAction_T2 = 0;
+        public int DataOperationAction_T2
+        {
+            get { return _DataOperationAction_T2; }
+            set { _DataOperationAction_T2 = value; }
+        }
+
+        public HWSettings()
+        {
+
+        }
+
+        public static bool HasValueChange(HWSettings newVal, HWSettings oldVal, out List<string> lstUserTrailMsg)
+        {
+            bool valueChange = false;
+            lstUserTrailMsg = new List<string>();
+            if (newVal == null || oldVal == null)
+                return valueChange;
+            string MsgStr;
+
+            if (newVal.HWDeviceName != oldVal.HWDeviceName) { valueChange = true; MsgStr = "HWDeviceName OldValue=" + oldVal.HWDeviceName + ", NewValue=" + newVal.HWDeviceName + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.ApplicationPath != oldVal.ApplicationPath) { valueChange = true; MsgStr = "ApplicationPath OldValue=" + oldVal.ApplicationPath + ", NewValue=" + newVal.ApplicationPath + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.ApplicationCaption != oldVal.ApplicationCaption) { valueChange = true; MsgStr = "ApplicationCaption OldValue=" + oldVal.ApplicationCaption + ", NewValue=" + newVal.ApplicationCaption + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.ActivateOperation != oldVal.ActivateOperation) { valueChange = true; MsgStr = "ActivateOperation OldValue=" + oldVal.ActivateOperation + ", NewValue=" + newVal.ActivateOperation + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.HWDeviceName != oldVal.HWDeviceName) { valueChange = true; MsgStr = "HWDeviceName OldValue=" + oldVal.HWDeviceName + ", NewValue=" + newVal.HWDeviceName + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.Communication != oldVal.Communication) { valueChange = true; MsgStr = "Communication OldValue=" + oldVal.Communication + ", NewValue=" + newVal.Communication + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.ConnectAddress != oldVal.ConnectAddress) { valueChange = true; MsgStr = "ConnectAddress OldValue=" + oldVal.ConnectAddress + ", NewValue=" + newVal.ConnectAddress + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.PrimaryPort != oldVal.PrimaryPort) { valueChange = true; MsgStr = "PrimaryPort OldValue=" + oldVal.PrimaryPort + ", NewValue=" + newVal.PrimaryPort + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.SecondaryPort != oldVal.SecondaryPort) { valueChange = true; MsgStr = "SecondaryPort OldValue=" + oldVal.SecondaryPort + ", NewValue=" + newVal.SecondaryPort + ","; lstUserTrailMsg.Add(MsgStr); }
+            if (newVal.HasSecondaryComm4DR != oldVal.HasSecondaryComm4DR) { valueChange = true; MsgStr = "HasSecondaryComm4DR OldValue=" + oldVal.HasSecondaryComm4DR + ", NewValue=" + newVal.HasSecondaryComm4DR + ","; lstUserTrailMsg.Add(MsgStr); }
+            
+            return valueChange;
+        }
+        public static HWSettings Read(string filePath)
+        {
+            try
+            {
+                HWSettings oHWSettings = new HWSettings();
+
+                if (!System.IO.File.Exists(filePath))
+                {
+                    oHWSettings = DefaultCreate();
+                }
+                else
+                    oHWSettings = GenericXmlSerializer<HWSettings>.Deserialize(filePath);
+
+                return oHWSettings;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError("{0},{1},{2}", DateTime.Now.ToString(), ex.Message, ex.StackTrace);
+            }
+            return null;
+        }
+        public static bool Write(HWSettings oHWSettings, string filePath)
+        {
+            GenericXmlSerializer<HWSettings>.Serialize(oHWSettings, filePath);
+            return true;
+        }
+
+        private static HWSettings DefaultCreate()
+        {
+            HWSettings conSett = new HWSettings();
+
+            conSett.Communication = "SERIAL";
+            conSett.ConnectAddress = "COM1";
+            conSett.PrimaryPort = -1;
+            return conSett;
+        }
+
+    }
+
+    public class PLCConfigs
+    {
+        private int _MsgSendGap = 150;
+        public int MsgSendGap
+        {
+            get { return _MsgSendGap; }
+            set { _MsgSendGap = value; }
+        }
+
+    }
 }
