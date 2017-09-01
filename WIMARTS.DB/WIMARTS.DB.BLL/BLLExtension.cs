@@ -513,7 +513,7 @@ namespace WIMARTS.DB.BLL
                 throw ex;
             }
         }
-     
+
     }
     public partial class DispatchDetailsBLL
     {
@@ -801,7 +801,6 @@ namespace WIMARTS.DB.BLL
             }
         }
     }
-
     public partial class TransporterDetailsBLL
     {
         public DataTable GetTransporterDetailsDT()
