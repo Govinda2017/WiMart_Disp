@@ -28,15 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.splitDetails = new System.Windows.Forms.SplitContainer();
             this.splitDispMasterDetails = new System.Windows.Forms.SplitContainer();
+            this.picImage = new System.Windows.Forms.PictureBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.txtTransporter = new System.Windows.Forms.TextBox();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTotalQty = new System.Windows.Forms.TextBox();
@@ -89,7 +96,6 @@
             this.lblSensor1Count = new System.Windows.Forms.Label();
             this.lblSensor2Count = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.ctrlPLCDeck1 = new rcs.CONTROLS.CtrlPLCDeck();
             this.btnCamIndicator = new System.Windows.Forms.Button();
             this.btnScanIndicator = new System.Windows.Forms.Button();
             this.lblLicHolder = new System.Windows.Forms.Label();
@@ -98,22 +104,18 @@
             this.SplitStatus = new System.Windows.Forms.SplitContainer();
             this.lblScanStatus = new System.Windows.Forms.Label();
             this.lblStatusBar = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtTransporter = new System.Windows.Forms.TextBox();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.picImage = new System.Windows.Forms.PictureBox();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
             this.splitMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.splitDetails.Panel1.SuspendLayout();
             this.splitDetails.Panel2.SuspendLayout();
             this.splitDetails.SuspendLayout();
             this.splitDispMasterDetails.Panel1.SuspendLayout();
             this.splitDispMasterDetails.Panel2.SuspendLayout();
             this.splitDispMasterDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.splitDispDetails.Panel1.SuspendLayout();
             this.splitDispDetails.Panel2.SuspendLayout();
@@ -130,9 +132,6 @@
             this.SplitStatus.Panel1.SuspendLayout();
             this.SplitStatus.Panel2.SuspendLayout();
             this.SplitStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.SuspendLayout();
             // 
             // splitMain
@@ -153,9 +152,32 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.splitDetails);
-            this.splitMain.Size = new System.Drawing.Size(1150, 665);
+            this.splitMain.Size = new System.Drawing.Size(1150, 658);
             this.splitMain.SplitterDistance = 95;
             this.splitMain.TabIndex = 0;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(0, 118);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(93, 0);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Black;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(93, 118);
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
             // 
             // splitDetails
             // 
@@ -174,7 +196,7 @@
             // splitDetails.Panel2
             // 
             this.splitDetails.Panel2.Controls.Add(this.splitDispDetails);
-            this.splitDetails.Size = new System.Drawing.Size(1150, 665);
+            this.splitDetails.Size = new System.Drawing.Size(1150, 658);
             this.splitDetails.SplitterDistance = 426;
             this.splitDetails.TabIndex = 1;
             // 
@@ -214,9 +236,65 @@
             this.splitDispMasterDetails.Panel2.Controls.Add(this.cmbStatus);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.txtStartedAt);
             this.splitDispMasterDetails.Panel2.Controls.Add(this.label12);
-            this.splitDispMasterDetails.Size = new System.Drawing.Size(426, 542);
+            this.splitDispMasterDetails.Size = new System.Drawing.Size(426, 535);
             this.splitDispMasterDetails.SplitterDistance = 148;
             this.splitDispMasterDetails.TabIndex = 12;
+            // 
+            // picImage
+            // 
+            this.picImage.BackColor = System.Drawing.Color.White;
+            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
+            this.picImage.Location = new System.Drawing.Point(0, 0);
+            this.picImage.Name = "picImage";
+            this.picImage.Size = new System.Drawing.Size(424, 146);
+            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picImage.TabIndex = 0;
+            this.picImage.TabStop = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefresh.Image = global::WIMARTS.DISPATCH.Properties.Resources.th;
+            this.btnRefresh.Location = new System.Drawing.Point(386, 43);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(32, 27);
+            this.btnRefresh.TabIndex = 45;
+            this.btnRefresh.Text = " ";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // txtTransporter
+            // 
+            this.txtTransporter.BackColor = System.Drawing.Color.White;
+            this.txtTransporter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTransporter.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransporter.Location = new System.Drawing.Point(112, 109);
+            this.txtTransporter.Name = "txtTransporter";
+            this.txtTransporter.ReadOnly = true;
+            this.txtTransporter.Size = new System.Drawing.Size(306, 27);
+            this.txtTransporter.TabIndex = 44;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.BackColor = System.Drawing.Color.White;
+            this.txtCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCustomer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomer.Location = new System.Drawing.Point(112, 76);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(306, 27);
+            this.txtCustomer.TabIndex = 43;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(6, 111);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 19);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "Transporter";
             // 
             // label6
             // 
@@ -427,7 +505,7 @@
             this.pnlButtons.Controls.Add(this.btnStartInsp);
             this.pnlButtons.Controls.Add(this.btnStopInsp);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 542);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 535);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(426, 123);
             this.pnlButtons.TabIndex = 29;
@@ -523,7 +601,7 @@
             // splitDispDetails.Panel2
             // 
             this.splitDispDetails.Panel2.Controls.Add(this.splitScanner);
-            this.splitDispDetails.Size = new System.Drawing.Size(720, 665);
+            this.splitDispDetails.Size = new System.Drawing.Size(720, 658);
             this.splitDispDetails.SplitterDistance = 287;
             this.splitDispDetails.TabIndex = 1;
             // 
@@ -677,7 +755,7 @@
             // 
             this.splitScanner.Panel2.Controls.Add(this.dataGridView1);
             this.splitScanner.Panel2.Controls.Add(this.dgvScannedData);
-            this.splitScanner.Size = new System.Drawing.Size(720, 374);
+            this.splitScanner.Size = new System.Drawing.Size(720, 367);
             this.splitScanner.SplitterDistance = 58;
             this.splitScanner.TabIndex = 0;
             // 
@@ -738,7 +816,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 188);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 181);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -815,7 +893,7 @@
             this.dgvScannedData.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvScannedData.RowTemplate.Height = 30;
             this.dgvScannedData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvScannedData.Size = new System.Drawing.Size(718, 310);
+            this.dgvScannedData.Size = new System.Drawing.Size(718, 303);
             this.dgvScannedData.TabIndex = 1;
             // 
             // SrNoColumn
@@ -833,7 +911,7 @@
             this.ProductCodeColumn.HeaderText = "Product Code";
             this.ProductCodeColumn.Name = "ProductCodeColumn";
             this.ProductCodeColumn.ReadOnly = true;
-            this.ProductCodeColumn.Width = 127;
+            this.ProductCodeColumn.Width = 116;
             // 
             // BatchNameColumn
             // 
@@ -903,7 +981,6 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.ctrlPLCDeck1);
             this.flowLayoutPanel1.Controls.Add(this.btnCamIndicator);
             this.flowLayoutPanel1.Controls.Add(this.btnScanIndicator);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -913,19 +990,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(315, 47);
             this.flowLayoutPanel1.TabIndex = 60;
             // 
-            // ctrlPLCDeck1
-            // 
-            this.ctrlPLCDeck1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctrlPLCDeck1.BackColor = System.Drawing.Color.MistyRose;
-            this.ctrlPLCDeck1.DisplayName = "HWC";
-            this.ctrlPLCDeck1.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.ctrlPLCDeck1.Location = new System.Drawing.Point(225, 4);
-            this.ctrlPLCDeck1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ctrlPLCDeck1.MaximumSize = new System.Drawing.Size(400, 150);
-            this.ctrlPLCDeck1.Name = "ctrlPLCDeck1";
-            this.ctrlPLCDeck1.Size = new System.Drawing.Size(87, 41);
-            this.ctrlPLCDeck1.TabIndex = 5;
-            // 
             // btnCamIndicator
             // 
             this.btnCamIndicator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -934,7 +998,7 @@
             this.btnCamIndicator.FlatAppearance.BorderSize = 2;
             this.btnCamIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCamIndicator.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCamIndicator.Location = new System.Drawing.Point(142, 3);
+            this.btnCamIndicator.Location = new System.Drawing.Point(235, 3);
             this.btnCamIndicator.Name = "btnCamIndicator";
             this.btnCamIndicator.Size = new System.Drawing.Size(77, 41);
             this.btnCamIndicator.TabIndex = 56;
@@ -949,7 +1013,7 @@
             this.btnScanIndicator.FlatAppearance.BorderSize = 2;
             this.btnScanIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScanIndicator.Font = new System.Drawing.Font("Calibri", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScanIndicator.Location = new System.Drawing.Point(59, 3);
+            this.btnScanIndicator.Location = new System.Drawing.Point(152, 3);
             this.btnScanIndicator.Name = "btnScanIndicator";
             this.btnScanIndicator.Size = new System.Drawing.Size(77, 41);
             this.btnScanIndicator.TabIndex = 59;
@@ -1000,7 +1064,7 @@
             // 
             this.SplitStatus.BackColor = System.Drawing.Color.Transparent;
             this.SplitStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SplitStatus.Location = new System.Drawing.Point(0, 712);
+            this.SplitStatus.Location = new System.Drawing.Point(0, 705);
             this.SplitStatus.Name = "SplitStatus";
             // 
             // SplitStatus.Panel1
@@ -1043,89 +1107,10 @@
             this.lblStatusBar.Text = "SYSTEM IS IN STANDBY MODE";
             this.lblStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 111);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 19);
-            this.label9.TabIndex = 42;
-            this.label9.Text = "Transporter";
-            // 
-            // txtTransporter
-            // 
-            this.txtTransporter.BackColor = System.Drawing.Color.White;
-            this.txtTransporter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTransporter.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTransporter.Location = new System.Drawing.Point(112, 109);
-            this.txtTransporter.Name = "txtTransporter";
-            this.txtTransporter.ReadOnly = true;
-            this.txtTransporter.Size = new System.Drawing.Size(306, 27);
-            this.txtTransporter.TabIndex = 44;
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.BackColor = System.Drawing.Color.White;
-            this.txtCustomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCustomer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomer.Location = new System.Drawing.Point(112, 76);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(306, 27);
-            this.txtCustomer.TabIndex = 43;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = global::WIMARTS.DISPATCH.Properties.Resources.th;
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRefresh.Location = new System.Drawing.Point(386, 43);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(32, 27);
-            this.btnRefresh.TabIndex = 45;
-            this.btnRefresh.Text = " ";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.White;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 118);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(93, 0);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Black;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(93, 118);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // picImage
-            // 
-            this.picImage.BackColor = System.Drawing.Color.White;
-            this.picImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
-            this.picImage.Location = new System.Drawing.Point(0, 0);
-            this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(424, 146);
-            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picImage.TabIndex = 0;
-            this.picImage.TabStop = false;
-            // 
             // FrmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(1150, 757);
+            this.ClientSize = new System.Drawing.Size(1150, 750);
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.SplitStatus);
             this.Controls.Add(this.pnlHeading);
@@ -1142,6 +1127,8 @@
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
             this.splitMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.splitDetails.Panel1.ResumeLayout(false);
             this.splitDetails.Panel2.ResumeLayout(false);
             this.splitDetails.ResumeLayout(false);
@@ -1149,6 +1136,7 @@
             this.splitDispMasterDetails.Panel2.ResumeLayout(false);
             this.splitDispMasterDetails.Panel2.PerformLayout();
             this.splitDispMasterDetails.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
             this.splitDispDetails.Panel1.ResumeLayout(false);
@@ -1168,9 +1156,6 @@
             this.SplitStatus.Panel1.ResumeLayout(false);
             this.SplitStatus.Panel2.ResumeLayout(false);
             this.SplitStatus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.ResumeLayout(false);
 
         }
