@@ -50,13 +50,13 @@ namespace WIMARTS.DISPATCH
         private bool HasController = true;
         //private HWControl mHWControl;
         //private Globals.HWCValues mHwcValues;
-        
+
         private IRedInspection mInspectDev1;
         private IRedInspection mInspectDev2;
-        
+
         private int HwAccessMode = 0;
         private bool _ManualMode = false;
-        
+
         /// <summary>
         /// This will be used when, Only valid FG Code will be used for checking.
         /// No UID Tracing and other parameters.
@@ -162,7 +162,7 @@ namespace WIMARTS.DISPATCH
                             UpdateStatusColor(ctrlPLCDeck1, false);
                             UpdateStatusColor(btnCamIndicator, false);
                             UpdateStatusColor(btnScanIndicator, false);
-                            
+
                             TriggerQueue = new Queue<int>();
                             EnableControl(btnStartInsp, false);
                             EnableControl(btnStopInsp, true);
@@ -170,7 +170,7 @@ namespace WIMARTS.DISPATCH
                             EnableControl(btnMode, false);
                             EnableControl(cmbDispMaster, false);
                             EnableControl(btnMode, true);
-                            UpdateText(btnStopInsp, "EXI&T"); 
+                            UpdateText(btnStopInsp, "EXI&T");
                             UpdateText(txtStartedAt, "");
                             GoodCount = TotalBadCount = 0;
                             UpdateText(lblStatusBar, "SYSTEM STARTED...");
@@ -194,7 +194,7 @@ namespace WIMARTS.DISPATCH
                                     mInspectDev1.SubScribeDevice();
                                 }
                                 TriggerQueue = new Queue<int>();
-                                UpdateText(btnStopInsp, "EXI&T"); 
+                                UpdateText(btnStopInsp, "EXI&T");
                                 EnableControl(btnStartInsp, true);
                                 EnableControl(btnStopInsp, true);
                                 EnableControl(btnSettings, true);
@@ -213,14 +213,14 @@ namespace WIMARTS.DISPATCH
                                 Trace.TraceInformation("{0}, System is in Standby", DateTime.Now);
                             }
                         }
-                        break;                    
+                        break;
                     case AppMode.ReadyMode:
                         {
                             if (HasController == true)
                             {
                                 //mHWControl.CURRENTMODEEXIT();
                                 //RetryCounts++;
-                                
+
                             }
                             ManualMode = !(HwAccessMode == 0 || HwAccessMode == 1);
 
@@ -337,7 +337,7 @@ namespace WIMARTS.DISPATCH
                         {
                             DisconnectCam2();
                             UpdateText(btnStartInsp, "&START");
-                            UpdateText(btnStopInsp, "&EXIT JOB"); 
+                            UpdateText(btnStopInsp, "&EXIT JOB");
                             //UpdateText(btnStopInsp, "EXI&T");
                             EnableControl(btnStartInsp, true);
                             EnableControl(btnStopInsp, true);
@@ -364,7 +364,7 @@ namespace WIMARTS.DISPATCH
                             EnableControl(btnMode, true);
                             GoodCount = TotalBadCount = 0;
                             UpdateText(btnStartInsp, "&START JOB");
-                            UpdateText(btnStopInsp, "EXI&T"); 
+                            UpdateText(btnStopInsp, "EXI&T");
                             UpdateText(lblStatusBar, "SYSTEM IS IN STANDBY MODE...");
                             UpdateText(lblScanStatus, "");
                             UpdateText(txtScannedData, "");
@@ -444,8 +444,6 @@ namespace WIMARTS.DISPATCH
             get { return _Sens2TotalCount; }
             set { _Sens2TotalCount = value; }
         }
-
-
         private Queue<int> TriggerQueue;
 
         private DispatchMaster mJobMaster;
@@ -459,7 +457,7 @@ namespace WIMARTS.DISPATCH
         private List<string> mLstUIDsInJob = new List<string>();
 
         private decimal TotalQuantity = 0;
-        
+
         #endregion Properties
 
         #region UI Operations
@@ -468,7 +466,7 @@ namespace WIMARTS.DISPATCH
         {
             InitializeComponent();
             lblLicHolder.Text = RedSys.Integrity.GetCompName;
-            
+
             bllMgr = new BLLManager();
             mCurUserLogged = oCurUserLogged;
             mJobMaster = new DispatchMaster();
@@ -476,7 +474,7 @@ namespace WIMARTS.DISPATCH
             lstDispDetails = new List<DispatchDetails>();
 
             HasController = UTIL.SystemIntegrity.Globals.AppSettings.HasHwController;
-            
+
             //mHwcValues = Globals.HWCSettings.ReadValues();
 
             HwAccessMode = UTIL.SystemIntegrity.Globals.AppSettings.HWMode;
@@ -484,7 +482,7 @@ namespace WIMARTS.DISPATCH
             AllowFreeFlowDispatch = UTIL.SystemIntegrity.Globals.AppSettings.AllowFreeFlowDispatch;
             AllowOnlyScheduleDispatch = UTIL.SystemIntegrity.Globals.AppSettings.AllowOnlyScheduleDispatch;
             AllowOnlyProductionVerified = UTIL.SystemIntegrity.Globals.AppSettings.AllowOnlyProductionVerified;
-            
+
             DispatchDaysLimit = UTIL.SystemIntegrity.Globals.AppSettings.DispatchDaysLimit;
         }
         private void FrmMain_Load(object sender, EventArgs e)
@@ -571,12 +569,12 @@ namespace WIMARTS.DISPATCH
             LoadDispatchMaster();
         }
     }
-    
+
 
     //private enum DispatchMode
     //{
     //    Free = 0,
     //    Controlled = 1,
     //}
-        
+
 }
